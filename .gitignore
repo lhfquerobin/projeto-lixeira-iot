@@ -1,0 +1,27 @@
+# Configurações locais e segredos
+config.h
+.env
+.env.*
+!.env.example
+secrets.h
+credentials.json
+
+# Compilação e ferramentas
+.pio/
+.tools/
+build/
+*.elf
+*.bin
+*.hex
+*.o
+*.a
+
+# Arquivos temporários
+/tmp/
+node_modules/
+__pycache__/
+*.pyc
+~$*
+*.tmp
+.DS_Store
+Thumbs.db

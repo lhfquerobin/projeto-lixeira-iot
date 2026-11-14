@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Painel de monitoramento de peso da lixeira conectada.">
+  <meta name="theme-color" content="#f7f7f8">
+  <title>Lixeira IoT · Lixeiras</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23e8e0f5'/%3E%3Cpath d='M12 13h16m-13 0 1 17h8l1-17m-8 0v-3h6v3' fill='none' stroke='%23222226' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/mqtt.min.js"></script>
+  <script type="module" src="visao-geral.js"></script>
+</head>
+<body>
+  <main>
+    <div class="titulo-pagina"><h1>Lixeiras</h1><p>Selecione uma lixeira para consultar os detalhes.</p></div>
+      <section class="lista-lixeiras" aria-label="Lixeiras monitoradas">
+        <a id="lixeira-01" class="lixeira-card" href="lixeira.html" data-recente="false" data-conhecido="false" data-alerta="false">
+          <span class="cabecalho-lixeira"><strong>Lixeira 01</strong><span class="tag-lixeira">Configurada</span></span>
+          <svg class="icone-lixeira" viewBox="0 0 140 160" fill="none" aria-hidden="true">
+            <defs><clipPath id="corpo-01"><path d="M31 40H109L102 145H38Z"/></clipPath></defs>
+            <path class="fundo-lixeira" d="M31 40H109L102 145H38Z"/>
+            <rect id="nivel-lixeira" class="nivel-lixeira" x="30" y="145" width="80" height="0" clip-path="url(#corpo-01)"/>
+            <path d="M31 40H109L102 145H38L31 40ZM24 33H116V40H24V33ZM55 33V23H85V33M53 57L56 126M70 57V126M87 57L84 126"/>
+          </svg>
+          <span class="percentual"><span id="porcentagem">—</span><span>%</span></span>
+          <span id="estado-cartao" class="estado-cartao" role="status">Aguardando dados</span>
+          <span class="abrir-lixeira">Ver detalhes <span aria-hidden="true">↗</span></span>
+        </a>
+        <button class="lixeira-card lixeira-inativa" type="button" disabled>
+          <span class="cabecalho-lixeira"><strong>Lixeira 02</strong><span class="tag-lixeira">Inativa</span></span>
+          <svg class="icone-lixeira" viewBox="0 0 140 160" fill="none" aria-hidden="true"><path class="fundo-lixeira" d="M31 40H109L102 145H38Z"/><path d="M31 40H109L102 145H38L31 40ZM24 33H116V40H24V33ZM55 33V23H85V33M53 57L56 126M70 57V126M87 57L84 126"/></svg>
+          <span class="percentual">—<span>%</span></span>
+          <span class="estado-cartao">Sem dispositivo conectado</span>
+          <span class="abrir-lixeira">Indisponível</span>
+        </button>
+        <button class="lixeira-card lixeira-inativa" type="button" disabled>
+          <span class="cabecalho-lixeira"><strong>Lixeira 03</strong><span class="tag-lixeira">Inativa</span></span>
+          <svg class="icone-lixeira" viewBox="0 0 140 160" fill="none" aria-hidden="true"><path class="fundo-lixeira" d="M31 40H109L102 145H38Z"/><path d="M31 40H109L102 145H38L31 40ZM24 33H116V40H24V33ZM55 33V23H85V33M53 57L56 126M70 57V126M87 57L84 126"/></svg>
+          <span class="percentual">—<span>%</span></span>
+          <span class="estado-cartao">Sem dispositivo conectado</span>
+          <span class="abrir-lixeira">Indisponível</span>
+        </button>
+      </section>
+
+    <p id="aviso" class="aviso" role="status"></p>
+  </main>
+</body>
+</html>

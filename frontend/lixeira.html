@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Painel de monitoramento de peso da lixeira conectada.">
+  <meta name="theme-color" content="#f7f7f8">
+  <title>Lixeira 01 · Detalhes</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23e8e0f5'/%3E%3Cpath d='M12 13h16m-13 0 1 17h8l1-17m-8 0v-3h6v3' fill='none' stroke='%23222226' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/mqtt.min.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main>
+    <a class="voltar" href="index.html">← Voltar às lixeiras</a>
+    <div class="titulo-pagina"><h1>Lixeira 01</h1><p>Peso, estado da leitura e histórico do dispositivo.</p></div>
+      <section class="faixa-conexao" aria-label="Conexão MQTT">
+        <div class="faixa-texto"><span class="icone-conexao" aria-hidden="true">↔</span><div><strong>Recebimento de dados</strong><p>Conexão automática com o dispositivo via MQTT.</p></div></div>
+        <span id="conexao" class="conexao" data-estado="conectando" role="status">Conectando ao broker</span>
+      </section>
+
+      <section id="painel" class="resumo" data-ativo="false" aria-label="Monitoramento da lixeira">
+        <div class="cartao cartao-peso">
+          <div class="rotulo-cartao"><p id="rotulo-peso">Peso atual</p><span class="peso-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 8a4 4 0 0 1 8 0m-10 0h12l3 13H3L6 8Z"/><path d="M12 4v4"/></svg></span></div>
+          <div class="valor"><span id="peso">—</span><span class="unidade">kg</span></div>
+          <p class="nota-cartao">LED do ESP32: <strong id="alerta-local">Aguardando atualização</strong></p>
+        </div>
+        <div class="cartao cartao-estado" role="status">
+          <p class="rotulo-cartao">Estado da leitura</p>
+          <strong class="estado"><span class="indicador" aria-hidden="true"></span><span id="estado-leitura">Aguardando dados</span></strong>
+          <p id="descricao-leitura" class="nota-cartao">Inicie a simulação no Wokwi para acompanhar o peso.</p>
+        </div>
+        <div class="cartao cartao-tempo">
+          <p class="rotulo-cartao">Última atualização</p>
+          <strong id="atualizacao" class="tempo">Nenhuma leitura</strong>
+          <p class="nota-cartao">Tempo desde o recebimento.</p>
+        </div>
+      </section>
+      <p id="aviso" class="aviso" role="status"></p>
+
+      <section id="historico" class="historico" aria-labelledby="titulo-historico">
+        <div class="titulo-secao"><div><h2 id="titulo-historico">Leituras recentes</h2><p>Últimos 6 registros salvos neste navegador</p></div><button id="limpar" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></svg>Limpar histórico</button></div>
+        <div id="historico-vazio" class="vazio"><p>Nenhuma leitura recebida</p><span>Os registros aparecem aqui quando o dispositivo enviar dados.</span></div>
+        <table id="tabela" hidden><caption class="somente-leitor">Últimas seis leituras salvas neste navegador</caption><thead><tr><th scope="col">Horário de recebimento</th><th scope="col">Peso (kg)</th></tr></thead><tbody id="leituras"></tbody></table>
+        <div class="rodape-historico">Histórico salvo neste navegador. Limpar a lista preserva o último peso.</div>
+      </section>
+
+      <section id="configuracao" class="configuracao" aria-label="Informações da conexão">
+        <details><summary>Detalhes da conexão</summary><div class="conteudo-detalhes"><p><strong>Broker</strong> broker.hivemq.com · WebSocket seguro (WSS)</p><p><strong>Tópico</strong> <code id="topico"></code></p><p>Estar conectado ao broker não confirma que o sensor está ativo. Após 5 segundos sem uma nova leitura, o último peso é considerado desatualizado. O horário da tabela é o de recebimento neste navegador.</p></div></details>
+      </section>
+  </main>
+</body>
+</html>
